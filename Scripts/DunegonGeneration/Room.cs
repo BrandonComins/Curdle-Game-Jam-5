@@ -7,6 +7,13 @@ public class Room : MonoBehaviour{
     public int x;
     public int y;
 
+    private bool updatedDoors = false;
+
+    public Room(int x, int y){
+        x = x;
+        y = y;
+    }
+
     public Door leftDoor;
     public Door rightDoor;
     public Door topDoor;
@@ -43,6 +50,13 @@ public class Room : MonoBehaviour{
         RoomController.instance.registerRoom(this);
     }
 
+    void Update(){
+        if(name.Contains("End") && !updatedDoors){
+            removeUnconnectedDoors();
+            updatedDoors = true;
+        }
+    }
+
     public void removeUnconnectedDoors(){
         foreach(Door door in doors){
             switch(door.doorType){
@@ -53,19 +67,19 @@ public class Room : MonoBehaviour{
                 break;
                 
                 case Door.DoorType.left:
-                    if(getRight() == null){
+                    if(getLeft() == null){
                         door.gameObject.SetActive(false);
                     }
                 break;
                 
                 case Door.DoorType.top:
-                    if(getRight() == null){
+                    if(getTop() == null){
                         door.gameObject.SetActive(false);
                     }
                 break;
                 
                 case Door.DoorType.bottom:
-                    if(getRight() == null){
+                    if(getBottom() == null){
                         door.gameObject.SetActive(false);
                     }
                 break;
@@ -74,16 +88,16 @@ public class Room : MonoBehaviour{
     }
 
     public Room getRight(){
-        if(RoomController.instance.doesRoomExist(x + 1, y)){
-            return RoomController.instance.findRoom(x + 1, y);
+        if(RoomController.instance.doesRoomExist(x - 1, y)){
+            return RoomController.instance.findRoom(x - 1, y);
         }else{
             return null;
         }     
     }
 
     public Room getLeft(){
-        if(RoomController.instance.doesRoomExist(x - 1, y)){
-            return RoomController.instance.findRoom(x - 1, y);
+        if(RoomController.instance.doesRoomExist(x + 1, y)){
+            return RoomController.instance.findRoom(x + 1, y);
         }else{
             return null;
         } 
