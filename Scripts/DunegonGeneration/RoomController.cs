@@ -79,29 +79,34 @@ public class RoomController : MonoBehaviour {
     }
 
     public void registerRoom(Room room){
-        room.transform.position = new Vector3(
-            currentLoadRoomData.x * Constants.roomWidth,
-            currentLoadRoomData.y * Constants.roomHeight,
-            0
-        );
-        room.x = currentLoadRoomData.x;
-        room.y = currentLoadRoomData.y;
-        room.name = currentWorldName 
-            + "-" 
-            + currentLoadRoomData.name
-            + " " 
-            + room.x 
-            + ", " 
-            + room.y; 
-        room.transform.parent = transform;
+        if(!doesRoomExist(currentLoadRoomData.x, currentLoadRoomData.y)){
+            room.transform.position = new Vector3(
+                currentLoadRoomData.x * Constants.roomWidth,
+                currentLoadRoomData.y * Constants.roomHeight,
+                0
+            );
+            room.x = currentLoadRoomData.x;
+            room.y = currentLoadRoomData.y;
+            room.name = currentWorldName 
+                + "-" 
+                + currentLoadRoomData.name
+                + " " 
+                + room.x 
+                + ", " 
+                + room.y; 
+            room.transform.parent = transform;
 
-        isLoadingRoom = false;
-        
-        if(loadedRooms.Count == 0){
-            CameraController.instance.currentRoom = room;
-        }
+            isLoadingRoom = false;
+            
+            if(loadedRooms.Count == 0){
+                CameraController.instance.currentRoom = room;
 
+            }
         loadedRooms.Add(room);
+        }else{
+            Destroy(room.gameObject); 
+            isLoadingRoom = false;
+        }
     }
     public bool doesRoomExist(int x, int y){
         return loadedRooms.Find(
