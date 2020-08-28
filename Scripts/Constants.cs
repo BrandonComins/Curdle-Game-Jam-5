@@ -13,6 +13,11 @@ public class Constants  {
 
     public static float fireDelay = .5f;
 
+    //Room
+
+    public static float roomWidth = 17;
+    public static float roomHeight = 9;
+
 
 
 }
