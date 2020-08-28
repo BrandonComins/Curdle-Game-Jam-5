@@ -26,6 +26,11 @@ public class Room : MonoBehaviour{
         return new Vector3(x * Constants.roomWidth, y * Constants.roomHeight);
     }
 
+    void OnTriggerEnter2D(Collider2D collider){
+        if(collider.tag == "Player"){
+            RoomController.instance.onPlayerEnterRoom(this);
+        }
+    }
 }
 
 

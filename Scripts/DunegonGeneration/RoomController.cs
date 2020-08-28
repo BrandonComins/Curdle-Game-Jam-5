@@ -18,6 +18,8 @@ public class RoomController : MonoBehaviour {
     string currentWorldName = "Garden";
     RoomInfo currentLoadRoomData;
 
+    Room currentRoom;
+
     Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
 
     public List<Room> loadedRooms = new List<Room>();
@@ -94,6 +96,11 @@ public class RoomController : MonoBehaviour {
         room.transform.parent = transform;
 
         isLoadingRoom = false;
+        
+        if(loadedRooms.Count == 0){
+            CameraController.instance.currentRoom = room;
+        }
+
         loadedRooms.Add(room);
     }
     public bool doesRoomExist(int x, int y){
@@ -102,5 +109,8 @@ public class RoomController : MonoBehaviour {
             && item.y == y
         )   != null;
     }
-
+    public void onPlayerEnterRoom(Room room){
+        CameraController.instance.currentRoom = room;
+        currentRoom = room;
+    }
 }

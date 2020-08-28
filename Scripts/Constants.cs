@@ -18,6 +18,9 @@ public class Constants  {
     public static float roomWidth = 17;
     public static float roomHeight = 9;
 
+    //Camera
+    public static float moveSpeedWhenChangeRoom = 100f;
+
 
 
 }
