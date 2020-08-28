@@ -32,9 +32,9 @@ public class RoomController : MonoBehaviour {
 
     //testing
     void Start(){
-        loadRoom("Start", 0, 0);
-        loadRoom("Empty", 0, 1);
-        loadRoom("Empty", 0, -1);
+        // loadRoom("Start", 0, 0);
+        // loadRoom("Empty", 0, 1);
+        // loadRoom("Empty", 0, -1);
     }
 
     void Update(){

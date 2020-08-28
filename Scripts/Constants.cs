@@ -21,6 +21,4 @@ public class Constants  {
     //Camera
     public static float moveSpeedWhenChangeRoom = 100f;
 
-
-
 }
