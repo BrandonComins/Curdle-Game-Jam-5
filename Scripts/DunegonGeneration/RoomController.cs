@@ -103,6 +103,7 @@ public class RoomController : MonoBehaviour {
 
             }
         loadedRooms.Add(room);
+        room.removeUnconnectedDoors();
         }else{
             Destroy(room.gameObject); 
             isLoadingRoom = false;
@@ -114,6 +115,14 @@ public class RoomController : MonoBehaviour {
             && item.y == y
         )   != null;
     }
+
+    public Room findRoom(int x, int y){
+        return loadedRooms.Find(
+            item => item.x == x
+            && item.y == y
+        );
+    }
+
     public void onPlayerEnterRoom(Room room){
         CameraController.instance.currentRoom = room;
         currentRoom = room;
