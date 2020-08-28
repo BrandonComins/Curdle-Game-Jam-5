@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 1256242538}
-  thornPrefab: {fileID: 2102928061001910786, guid: 0fc5e044c70453541907f7ce00b271f3,
+  thornPrefab: {fileID: 5435671670965577512, guid: 1ed28197a64059044885b626dae5d25f,
     type: 3}
 --- !u!58 &1256242537
 CircleCollider2D:
@@ -328,7 +328,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1049614e06e23a24fa96b6e100dc9de1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
