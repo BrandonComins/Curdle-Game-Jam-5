@@ -6,6 +6,7 @@ using UnityEngine;
 public enum EnemyState {
     Wander,
     Follow,
+    Attack,
     Die
 };
 
@@ -13,10 +14,13 @@ public class EnemyController : MonoBehaviour{
     GameObject player;
     public EnemyState currentState; 
 
+    public float attackRange = .5f;
+    public float coolDown;
     public float range;
     public float speed;
     private bool chooseDirection = false;
     private bool dead = false;
+    private bool coolDownAttack = false;
     private Vector3 randomDirection;
     
     void Start() {
@@ -27,15 +31,19 @@ public class EnemyController : MonoBehaviour{
     void Update() {
         switch(currentState){
             case(EnemyState.Wander):
-            wander();
+                wander();
             break;
 
             case(EnemyState.Follow):
-            follow();
+                follow();
+            break;
+
+            case(EnemyState.Attack):
+                attack();
             break;
 
             case(EnemyState.Die):
-            die();
+                die();
             break;
         }
         if(isPlayerInRange(range) && currentState != EnemyState.Die){
@@ -43,6 +51,9 @@ public class EnemyController : MonoBehaviour{
         }
         else if(!isPlayerInRange(range) && currentState != EnemyState.Die){
             currentState = EnemyState.Wander;
+        }
+        if(Vector3.Distance(transform.position, player.transform.position) <= attackRange){
+            currentState = EnemyState.Attack;
         }
     }
     
@@ -80,6 +91,19 @@ public class EnemyController : MonoBehaviour{
             speed * Time.deltaTime
         );
 
+    }
+
+    void attack(){
+        if(!coolDownAttack){
+            GameController.damagePlayer(1);
+            StartCoroutine(CoolDown());
+        }
+    }
+
+    private IEnumerator CoolDown(){
+        coolDownAttack = true;
+        yield return new WaitForSeconds(coolDown);
+        coolDownAttack = false;
     }
 
     public void die(){
