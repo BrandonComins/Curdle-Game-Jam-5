@@ -15,8 +15,10 @@ public class Constants  {
 
     //Room
 
-    public static float roomWidth = 17;
-    public static float roomHeight = 9;
+    public static float roomWidth = 17f;
+    public static float roomHeight = 9f;
+
+    public static float offset = 1.5f;
 
     //Camera
     public static float moveSpeedWhenChangeRoom = 100f;
