@@ -15,5 +15,11 @@ public class baseThornProperties : MonoBehaviour {
         Destroy(gameObject);
     }
     
-
+    void OnTriggerEnter2D(Collider2D collider) {
+        if(collider.tag == "Enemy"){
+            collider.gameObject.GetComponent<EnemyController>().die();
+            Destroy(gameObject);
+            
+        }
+    }
 }
