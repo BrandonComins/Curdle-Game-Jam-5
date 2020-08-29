@@ -11,10 +11,9 @@ public enum EnemyState {
 
 public class EnemyController : MonoBehaviour{
     GameObject player;
-    public EnemyState currentState = EnemyState.Wander;
+    public EnemyState currentState; 
 
     public float range;
-
     public float speed;
     private bool chooseDirection = false;
     private bool dead = false;
@@ -22,6 +21,7 @@ public class EnemyController : MonoBehaviour{
     
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
+        currentState = EnemyState.Wander;
     }
 
     void Update() {
@@ -47,10 +47,7 @@ public class EnemyController : MonoBehaviour{
     }
     
     private bool isPlayerInRange(float range){
-        return Vector3.Distance(
-            transform.position, 
-            player.transform.position
-        ) <= range;
+        return Vector3.Distance(transform.position, player.transform.position) <= range;
     }
 
     private IEnumerator ChooseDirection(){
